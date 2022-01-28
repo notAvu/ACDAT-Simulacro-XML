@@ -9,9 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
 import java.io.OutputStream;
-import java.io.StringWriter;
 import java.util.ArrayList;
 
 
@@ -34,21 +32,25 @@ public class Main {
         assert document != null;
         Element root=document.createElement("productos");
             document.appendChild(root);
-        for (Producto p:productosList) {
-            Element pater=document.createElement("producto");
-            root.appendChild(pater);
-            Element codigo= document.createElement("codigo");
-            codigo.setTextContent(p.codigo);
-            pater.appendChild(codigo);
-            Element descripcion=document.createElement("descripcion");
-            descripcion.setTextContent(p.descripcion);
-            pater.appendChild(descripcion);
-            Element precio=document.createElement("precio");
-            precio.setTextContent(String.valueOf(p.precio));
-            pater.appendChild(precio);
-        }
+        Document finalDocument = document;
+        productosList.forEach(producto -> appendProduct(finalDocument, root, producto));
         writeXml(document, System.out);
     }
+
+    private static void appendProduct(Document document, Element root, Producto producto) {
+        Element pater= document.createElement("producto");
+        root.appendChild(pater);
+        Element codigo= document.createElement("codigo");
+        codigo.setTextContent(producto.codigo);
+        pater.appendChild(codigo);
+        Element descripcion= document.createElement("descripcion");
+        descripcion.setTextContent(producto.descripcion);
+        pater.appendChild(descripcion);
+        Element precio= document.createElement("precio");
+        precio.setTextContent(String.valueOf(producto.precio));
+        pater.appendChild(precio);
+    }
+
     private static void writeXml(Document doc, OutputStream output) {
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -73,43 +75,3 @@ public class Main {
 
     }
 }
-
-//public class JaxbExample
-//{
-//    public static void main(String[] args)
-//    {
-//        //Java object. We will convert it to XML.
-//        Employee employee = new Employee(1, "Lokesh", "Gupta", new Department(101, "IT"));
-//
-//        //Method which uses JAXB to convert object to XML
-//        jaxbObjectToXML(employee);
-//    }
-//
-//    private static void jaxbObjectToXML(Producto employee)
-//    {
-//        try
-//        {
-//            //Create JAXB Context
-//            JAXBContext jaxbContext = JAXBContext.newInstance(Producto.class);
-//
-//            //Create Marshaller
-//            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-//
-//            //Required formatting??
-//            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-//
-//            //Print XML String to Console
-//            StringWriter sw = new StringWriter();
-//
-//            //Write XML to StringWriter
-//            jaxbMarshaller.marshal(employee, sw);
-//
-//            //Verify XML Content
-//            String xmlContent = sw.toString();
-//            System.out.println( xmlContent );
-//
-//        } catch (JAXBException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//}
