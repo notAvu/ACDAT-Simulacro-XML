@@ -26,6 +26,7 @@ public class UtilidadesXML {
         assert document != null;
         Element root=document.createElement("productos");
         document.appendChild(root);
+
         Document finalDocument = document;
         listadoProductos.forEach(producto -> appendProduct(finalDocument, root, producto));
         try {
