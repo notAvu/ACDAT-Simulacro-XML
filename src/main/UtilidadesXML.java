@@ -39,7 +39,7 @@ public class UtilidadesXML {
         Element pater= document.createElement("producto");
         root.appendChild(pater);
         Element codigo= document.createElement("codigo");
-        codigo.setTextContent(producto.codigo);
+        codigo.setTextContent(String.valueOf(producto.codigo));
         pater.appendChild(codigo);
         Element descripcion= document.createElement("descripcion");
         descripcion.setTextContent(producto.descripcion);
