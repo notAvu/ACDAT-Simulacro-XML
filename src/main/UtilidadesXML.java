@@ -1,5 +1,6 @@
 package main;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -39,15 +40,24 @@ public class UtilidadesXML {
     private static void appendProduct(Document document, Element root, Producto producto) {
         Element pater= document.createElement("producto");
         root.appendChild(pater);
-        Element codigo= document.createElement("codigo");
-        codigo.setTextContent(String.valueOf(producto.codigo));
-        pater.appendChild(codigo);
-        Element descripcion= document.createElement("descripcion");
-        descripcion.setTextContent(producto.descripcion);
-        pater.appendChild(descripcion);
-        Element precio= document.createElement("precio");
-        precio.setTextContent(String.valueOf(producto.precio));
-        pater.appendChild(precio);
+        Attr attributeID= document.createAttribute("id");
+        attributeID.setValue(String.valueOf(producto.getId()));
+        pater.setAttributeNode(attributeID);
+        Element stock= document.createElement("stock");
+        stock.setTextContent(String.valueOf(producto.getStock()));
+        pater.appendChild(stock);
+        Element caracterisitcas= document.createElement("caracteristicas");
+        pater.appendChild(caracterisitcas);
+        Attr peso= document.createAttribute("peso");
+        peso.setValue(String.valueOf(producto.getPeso()));
+        caracterisitcas.setAttributeNode(peso);
+        Attr color= document.createAttribute("color");
+        color.setValue(String.valueOf(producto.getColor()));
+        caracterisitcas.setAttributeNode(color);
+
+        caracterisitcas.setAttribute("color", producto.getColor());
+        //        peso.setTextContent(String.valueOf(producto.peso));
+//        pater.appendChild(peso);
     }
 
     private static void writeXml(Document doc, OutputStream output) {

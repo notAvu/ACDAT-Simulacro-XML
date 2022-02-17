@@ -1,37 +1,47 @@
 package main;
 
 public class Producto {
-    int codigo;
-    String descripcion;
-    float precio;
+    private int id;
+    private int stock;
+    private float peso;
+    private String color;
 
-    public int getCodigo() {
-        return codigo;
+    public String getColor() {
+        return color;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public int getId() {
+        return id;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public float getPrecio() {
-        return precio;
+    public int getStock() {
+        return stock;
     }
 
-    public void setPrecio(float precio) {
-        this.precio = precio;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
-    public Producto(int codigo, String descripcion, float precio) {
-        this.codigo = codigo;
-        this.descripcion = descripcion;
-        this.precio = precio;
+    public float getPeso() {
+        return peso;
+    }
+
+    public void setPeso(float peso) {
+        this.peso = peso;
+    }
+
+    public Producto(int codigo, int stock, float peso,String color) {
+        this.id = codigo;
+        this.stock = stock;
+        this.peso = peso;
+        this.color=color;
     }
 }
